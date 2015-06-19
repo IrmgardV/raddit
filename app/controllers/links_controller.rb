@@ -61,7 +61,16 @@ class LinksController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def upvote
+    @link = link.find(params[:id])
+    @link.upvote_from current user 
+    redirect_to :back
+  end
+  def downvote
+    @link = link.find(params[:id])
+    @link.downvote_by current user 
+    redirect_to :back
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
